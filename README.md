@@ -1,9 +1,9 @@
 **12th-crossover-web-2**
 **크로스오버 -2조**
 
-팀원 : </ br>
-frontEnd: 유민기, 채희림 </ br>
-backEnd최현서, 김재헌
+팀원 :   
+frontEnd : 유민기, 채희림    </br>   
+backEnd : 최현서, 김재헌    </br>
 
 **convention**
 
