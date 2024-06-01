@@ -1,5 +1,3 @@
-<img width="865" alt="스크린샷 2024-06-01 오후 5 26 03" src="https://github.com/mju-likelion/12th-crossover-web-2/assets/108206432/04637a62-9327-4ced-a787-582551731317"># 12th-crossover-web-2
-
 **Getting Started**
 
 **convention**
