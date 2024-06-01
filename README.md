@@ -1,4 +1,4 @@
-**Getting Started**
+**12th-crossover-web-2**
 
 **convention**
 
@@ -11,10 +11,6 @@
     
   <img width="865" alt="스크린샷 2024-06-01 오후 5 26 03" src="https://github.com/mju-likelion/12th-crossover-web-2/assets/108206432/b8cd22e1-c0be-43b7-9184-36387d9fa0c9">
 
-    기능명은 최대한 간단하게 지정
-    
-    **ex) feature/product**
-    
 3. CommitType 네이밍
 ```java
 	
