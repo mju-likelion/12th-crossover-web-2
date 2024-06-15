@@ -1,0 +1,57 @@
+/* 색상 정의 */
+:root {
+    --colorGray: #717171;
+    --colorRed: #D72F2F;
+    --colorGreen: #2BCD3B;
+    --colorBlue1: #99CEFF;
+    --colorBlue2: #59A4FB;
+}
+
+/* 텍스트 스타일 */
+.mainTitle {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600; /* semi bold */
+    font-size: 54px;
+}
+
+.heading {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600; /* semi bold */
+    font-size: 28px;
+}
+
+.defaultText {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 500; /* medium */
+    font-size: 20px;
+}
+
+.helperText {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 500; /* medium */
+    font-size: 16px;
+}
+
+.buttonText {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600; /* semi bold */
+    font-size: 36px;
+}
+
+.subTitle {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600; /* semi bold */
+    font-size: 20px;
+}
+
+.subText {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 500; /* medium */
+    font-size: 20px;
+}
+
+.subTextBold {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600; /* semi bold */
+    font-size: 21px;
+}
