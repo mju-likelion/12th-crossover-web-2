@@ -19,7 +19,7 @@ function JoinPage() {
             return;
         }
         alert(`ID: ${id}, Password: ${password}, Email: ${email}`);
-        navigate('/');
+        navigate('/Main');
     };
 
     return (

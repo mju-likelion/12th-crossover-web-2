@@ -1,39 +1,5 @@
 import React from 'react';
 
-const styles = {
-    joinContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-        width: '600px',
-        borderRadius: '10px',
-    },
-    formGroup: {
-        marginBottom: '20px',
-        width: '100%',
-    },
-    input: {
-        width: '330px',
-        height: '50px',
-        padding: '10px',
-        fontSize: '16px',
-        borderRadius: '15px',
-        boxSizing: 'border-box',
-    },
-    small: {
-        display: 'block',
-        position: 'left',
-        marginTop: '5px',
-        fontSize: '12px',
-        color: '#999',
-    },
-    h2: {
-        textAlign: 'center',
-        marginBottom: '20px',
-    }
-};
-
 function JoinComponent1({ id, setId, password, setPassword, email, setEmail }) {
     return (
         <div style={styles.joinContainer}>
@@ -76,3 +42,38 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail }) {
 }
 
 export default JoinComponent1;
+
+
+const styles = {
+    joinContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        width: '600px',
+        borderRadius: '10px',
+    },
+    formGroup: {
+        marginBottom: '20px',
+        width: '100%',
+    },
+    input: {
+        width: '330px',
+        height: '50px',
+        padding: '10px',
+        fontSize: '16px',
+        borderRadius: '15px',
+        boxSizing: 'border-box',
+    },
+    small: {
+        display: 'block',
+        position: 'left',
+        marginTop: '5px',
+        fontSize: '12px',
+        color: '#999',
+    },
+    h2: {
+        textAlign: 'center',
+        marginBottom: '20px',
+    }
+};

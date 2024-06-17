@@ -1,38 +1,5 @@
 import React from 'react';
 
-const styles = {
-    formGroup: {
-        marginBottom: '20px',
-        width: '100%',
-    },
-    policyGroup: {
-        width: '100%',
-    },
-    policyHeader: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '10px',
-        fontWeight: 'bold',
-    },
-    agreeLabel: {
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '14px',
-        color: '#333',
-    },
-    policyTextarea: {
-        width: '100%',
-        height: '250px',
-        padding: '10px',
-        fontSize: '14px',
-        borderRadius: '15px',
-        border: '1px solid #717171',
-        resize: 'none',
-        boxSizing: 'border-box',
-    }
-};
-
 function JoinComponent2({ agree, setAgree }) {
     return (
         <div style={styles.formGroup}>
@@ -67,3 +34,36 @@ function JoinComponent2({ agree, setAgree }) {
 }
 
 export default JoinComponent2;
+
+const styles = {
+    formGroup: {
+        marginBottom: '20px',
+        width: '100%',
+    },
+    policyGroup: {
+        width: '100%',
+    },
+    policyHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '10px',
+        fontWeight: 'bold',
+    },
+    agreeLabel: {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '14px',
+        color: '#333',
+    },
+    policyTextarea: {
+        width: '100%',
+        height: '250px',
+        padding: '10px',
+        fontSize: '14px',
+        borderRadius: '15px',
+        border: '1px solid #717171',
+        resize: 'none',
+        boxSizing: 'border-box',
+    }
+};
