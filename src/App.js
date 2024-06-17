@@ -1,12 +1,26 @@
-import React from 'react';
-import "./App.css";
-import JoinComponent from "./Component/JoinComponent.js";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import JoinPage from './Page/JoinPage';
+// import LoginPage from './Page/LoginPage';
+// import MainPage from './Page/MainPage';
+// import PostPage from './Page/PostPage';
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
   return (
-    <div className="App">
-      <JoinComponent />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* <Route path="/" element={<LoginPage />} /> */}
+          {/* <Route path="/main" element={<MainPage posts={posts} setPosts={setPosts} />} />
+          <Route path="/post" element={<PostPage setPosts={setPosts} />} /> */}
+          {/* <Route path="/delete/:postId" element={<DeletePostPage posts={posts} setPosts={setPosts} />} /> */}
+          <Route path="/" element={<JoinPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
