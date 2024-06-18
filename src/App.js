@@ -1,24 +1,28 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import DeletePostPage from './Page/DeletePostPage';
+import JoinPage from './Page/JoinPage';
+// import LoginPage from './Page/LoginPage';
+import MainPage from './Page/MainPage';
+import PostPage from './Page/PostPage';
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* <Route path="/" element={<LoginPage />} /> */}
+          <Route path="/main" element={<MainPage posts={posts} setPosts={setPosts} />} />
+          <Route path="/post" element={<PostPage setPosts={setPosts} />} />
+          <Route path="/delete/:postId" element={<DeletePostPage posts={posts} setPosts={setPosts} />} />
+          <Route path="/" element={<JoinPage />} />
+          
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
