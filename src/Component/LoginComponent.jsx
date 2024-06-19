@@ -1,4 +1,5 @@
 import React from 'react';
+import '../commonComponent/commonComponent.css';
 
 function LoginComponent({ id, setId, password, setPassword }) {
     return (
@@ -13,7 +14,7 @@ function LoginComponent({ id, setId, password, setPassword }) {
                     required
                     style={styles.input}
                 />
-                <info style={styles.small}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</info>
+                <small style={styles.small}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>
             </div>
             <div style={styles.formGroup}>
                 <input
@@ -24,7 +25,7 @@ function LoginComponent({ id, setId, password, setPassword }) {
                     required
                     style={styles.input}
                 />
-                <info style={styles.small}>영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.</info>
+                <small style={styles.small}>영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.</small>
             </div>
         </div>
     );
@@ -38,7 +39,7 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '20px',
-        width: '600px',
+        width: '400px',
         borderRadius: '10px',
     },
     formGroup: {
@@ -46,10 +47,11 @@ const styles = {
         width: '100%',
     },
     input: {
-        width: '330px',
-        height: '50px',
+        width: '100%',
+        height: '60px',
         padding: '10px',
         fontSize: '16px',
+        border: '1px solid var(--colorGray)',
         borderRadius: '15px',
         boxSizing: 'border-box',
     },
