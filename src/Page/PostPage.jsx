@@ -25,22 +25,23 @@ const PostPage = ({ setPosts }) => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.formGroup}>
           <label style={styles.label}>
-            제목
-            <span style={styles.charCount}>{title.length} / 20</span>
+            제목 :{" "}
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={styles.input}
+              maxLength="20"
+              required
+            />
+            <span style={styles.titleCharCount}>( {title.length} / 20 )</span>
           </label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            style={styles.input}
-            maxLength="20"
-            required
-          />
         </div>
         <div style={styles.formGroup}>
           <label style={styles.label}>
-            내용
-            <span style={styles.charCount}>{content.length} / 140</span>
+            <span style={styles.contentCharCount}>
+              ( {content.length} / 140 )
+            </span>
           </label>
           <textarea
             value={content}
@@ -97,43 +98,57 @@ const styles = {
   form: {
     display: "flex",
     flexDirection: "column",
-    width: "794px",
+    width: "700px",
     padding: "20px",
     borderRadius: "10px",
   },
   formGroup: {
     marginBottom: "25px",
     position: "relative",
+    flexDirection: "row",
     borderRadius: "15px",
-    border: "2px solid #717171",
-    padding: "10px",
+    border: "2px solid var(--colorGray)",
+    padding: "20px",
+    alignItems: "center",
   },
   label: {
-    marginBottom: "5px",
-    fontWeight: "bold",
     display: "flex",
-    justifyContent: "space-between",
+    margin: "0 6px",
+    fontWeight: "bold",
+    fontSize: "20px",
+    alignItems: "center",
   },
   input: {
-    width: "100%",
-    padding: "10px",
-    fontSize: "16px",
-    borderRadius: "15px",
+    margin: "0 10px",
+    width: "80%",
+    padding: "5px 0",
+    fontSize: "20px",
+    border: "none",
+    borderRadius: "10px",
+    outline: "none",
   },
   textarea: {
     width: "100%",
     fontSize: "16px",
     borderRadius: "15px",
     resize: "none",
-    height: "550px",
-    padding: "10px",
+    height: "500px",
     boxSizing: "border-box",
     border: "none",
+    outline: "none",
   },
-  charCount: {
+  titleCharCount: {
     position: "absolute",
-    bottom: "5px",
-    right: "10px",
+    right: "30px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    fontSize: "12px",
+    color: "#999",
+  },
+  contentCharCount: {
+    position: "absolute",
+    right: "30px",
+    bottom: "30px",
     fontSize: "12px",
     color: "#999",
   },
