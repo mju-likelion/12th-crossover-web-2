@@ -7,7 +7,7 @@ const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, han
                 <div style={styles.formGroup}>
                     <label style={styles.label}>
                         {isReadOnly ? title : ""}
-                        <span style={styles.charCount}>{title.length} / 20</span>
+                        <span style={styles.count}>({title.length} / 20)</span>
                     </label>
                     {!isReadOnly && (
                         <input
@@ -29,7 +29,7 @@ const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, han
                         readOnly={isReadOnly}
                         required
                     />
-                    <span style={styles.charCount}>{content.length} / 140</span>
+                    <span style={styles.count}>({content.length} / 140)</span>
                 </div>
                 <p style={styles.note}>※ 작성된 게시글은 수정이 불가합니다.</p>
                 <div style={styles.buttonGroup}>
@@ -95,7 +95,8 @@ const styles = {
         marginBottom: '5px',
         fontWeight: 'bold',
         display: 'flex',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '50px',
     },
     input: {
         width: '100%',
@@ -113,12 +114,13 @@ const styles = {
         boxSizing: 'border-box',
         border: 'none',
     },
-    charCount: {
+    count: {
         position: 'absolute',
         bottom: '5px',
         right: '10px',
         fontSize: '12px',
         color: '#999',
+        marginBottom: '10px',
     },
     note: {
         fontSize: '12px',
@@ -159,4 +161,5 @@ const styles = {
     backButtonHover: {
         backgroundColor: '#666666',
     },
+
 };
