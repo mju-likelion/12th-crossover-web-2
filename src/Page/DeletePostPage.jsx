@@ -7,11 +7,26 @@ const DeletePostPage = ({ posts, setPosts }) => {
     const navigate = useNavigate();
     const post = posts.find((p) => p.id === postId);
 
-    const handleDelete = (confirm) => {
+    const handleDelete = async (confirm) => {
         if (confirm) {
-            setPosts((prevPosts) => prevPosts.filter((p) => p.id !== postId));
+            try {
+                const response = await fetch(`/boards/${postId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    // Remove the deleted post from the local state
+                    setPosts((prevPosts) => prevPosts.filter((p) => p.id !== postId));
+                    navigate('/main');
+                } else {
+                    console.error('Failed to delete the post');
+                    // Handle error if needed
+                }
+            } catch (error) {
+                console.error('Error deleting the post:', error);
+                // Handle error if needed
+            }
         }
-        navigate('/main');
     };
 
     if (!post) {
@@ -43,7 +58,6 @@ const DeletePostPage = ({ posts, setPosts }) => {
 };
 
 export default DeletePostPage;
-
 
 const styles = {
     container: {
