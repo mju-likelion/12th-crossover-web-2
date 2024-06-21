@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cancleIcon from '../Img/cancelIcon.svg';
-import checkBoxIcon from '../Img/checkBox.svg';
 import errorIcon from '../Img/errorIcon.svg';
+import successIcon from '../Img/successIcon.svg';
 
 function JoinComponent1({ id, setId, password, setPassword, email, setEmail, name, setName, errors }) {
     const [idValid, setIdValid] = useState(true);
@@ -42,7 +42,7 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
             return null; // 값이 비어 있으면 아이콘 숨김
         }
         if (isValid === true) {
-            return <img src={checkBoxIcon} alt="check-icon" style={styles.validationIcon} />;
+            return <img src={successIcon} alt="check-icon" style={styles.validationIcon} />;
         } else if (isValid === false) {
             return <img src={errorIcon} alt="error-icon" style={styles.validationIcon} />;
         }
