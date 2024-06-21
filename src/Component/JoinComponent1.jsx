@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import cancleIcon from '../Img/cancelIcon.svg';
+import checkBoxIcon from '../Img/checkBox.svg';
+import errorIcon from '../Img/errorIcon.svg';
 
 function JoinComponent1({ id, setId, password, setPassword, email, setEmail, name, setName, errors }) {
     const [idValid, setIdValid] = useState(true);
@@ -30,6 +33,22 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
         return isValid;
     };
 
+    const clearInput = (setter) => {
+        setter('');
+    };
+
+    const renderValidationIcon = (isValid, value) => {
+        if (value === '') {
+            return null; // 값이 비어 있으면 아이콘 숨김
+        }
+        if (isValid === true) {
+            return <img src={checkBoxIcon} alt="check-icon" style={styles.validationIcon} />;
+        } else if (isValid === false) {
+            return <img src={errorIcon} alt="error-icon" style={styles.validationIcon} />;
+        }
+        return null;
+    };
+
     return (
         <div style={styles.joinContainer}>
             <h2 style={styles.h2}>회원가입</h2>
@@ -42,20 +61,20 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        borderColor: idValid ? '#ccc' : 'red',
+                        ...(idValid ? styles.validInput : styles.invalidInput),
                     }}
                     onBlur={(e) => {
                         const isValid = validateId(e.target.value);
-                        if (isValid) {
-                            e.target.style.borderColor = 'green';
-                            e.target.nextSibling.innerText = '사용 가능한 아이디 입니다.';
-                            e.target.nextSibling.style.color = 'green';
-                        } else {
-                            e.target.nextSibling.innerText = '영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.';
-                            e.target.nextSibling.style.color = '#999';
-                        }
+                        setIdValid(isValid);
                     }}
                 />
+                <img
+                    src={cancleIcon}
+                    alt="back-icon"
+                    style={styles.cancelIcon}
+                    onClick={() => clearInput(setId)}
+                />
+                {renderValidationIcon(idValid, id)}
                 <small style={styles.small}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>
                 {errors.id && <div style={styles.error}>{errors.id}</div>}
             </div>
@@ -68,20 +87,20 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        borderColor: passwordValid ? '#ccc' : 'red',
+                        ...(passwordValid ? styles.validInput : styles.invalidInput),
                     }}
                     onBlur={(e) => {
                         const isValid = validatePassword(e.target.value);
-                        if (isValid) {
-                            e.target.style.borderColor = 'green';
-                            e.target.nextSibling.innerText = '사용 가능한 비밀번호 입니다.';
-                            e.target.nextSibling.style.color = 'green';
-                        } else {
-                            e.target.nextSibling.innerText = '영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.';
-                            e.target.nextSibling.style.color = '#999';
-                        }
+                        setPasswordValid(isValid);
                     }}
                 />
+                <img
+                    src={cancleIcon}
+                    alt="back-icon"
+                    style={styles.cancelIcon}
+                    onClick={() => clearInput(setPassword)}
+                />
+                {renderValidationIcon(passwordValid, password)}
                 <small style={styles.small}>영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.</small>
                 {errors.password && <div style={styles.error}>{errors.password}</div>}
             </div>
@@ -94,20 +113,20 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        borderColor: emailValid ? '#ccc' : 'red',
+                        ...(emailValid ? styles.validInput : styles.invalidInput),
                     }}
                     onBlur={(e) => {
                         const isValid = validateEmail(e.target.value);
-                        if (isValid) {
-                            e.target.style.borderColor = 'green';
-                            e.target.nextSibling.innerText = '사용 가능한 이메일 입니다.';
-                            e.target.nextSibling.style.color = 'green';
-                        } else {
-                            e.target.nextSibling.innerText = '사용하실 이메일을 입력해주세요.';
-                            e.target.nextSibling.style.color = '#999';
-                        }
+                        setEmailValid(isValid);
                     }}
                 />
+                <img
+                    src={cancleIcon}
+                    alt="back-icon"
+                    style={styles.cancelIcon}
+                    onClick={() => clearInput(setEmail)}
+                />
+                {renderValidationIcon(emailValid, email)}
                 <small style={styles.small}>사용하실 이메일을 입력해주세요.</small>
                 {errors.email && <div style={styles.error}>{errors.email}</div>}
             </div>
@@ -120,28 +139,26 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        borderColor: nameValid ? '#ccc' : 'red',
+                        ...(nameValid ? styles.validInput : styles.invalidInput),
                     }}
                     onBlur={(e) => {
                         const isValid = validateName(e.target.value);
-                        if (isValid) {
-                            e.target.style.borderColor = 'green';
-                            e.target.nextSibling.innerText = '유효한 이름 입니다.';
-                            e.target.nextSibling.style.color = 'green';
-                        } else {
-                            e.target.nextSibling.innerText = '이름을 입력해주세요.';
-                            e.target.nextSibling.style.color = '#999';
-                        }
+                        setNameValid(isValid);
                     }}
                 />
+                <img
+                    src={cancleIcon}
+                    alt="back-icon"
+                    style={styles.cancelIcon}
+                    onClick={() => clearInput(setName)}
+                />
+                {renderValidationIcon(nameValid, name)}
                 <small style={styles.small}>이름을 입력해주세요.</small>
                 {errors.name && <div style={styles.error}>{errors.name}</div>}
             </div>
         </div>
     );
 }
-
-export default JoinComponent1;
 
 const styles = {
     joinContainer: {
@@ -151,8 +168,10 @@ const styles = {
         padding: '20px',
         width: '600px',
         borderRadius: '10px',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
     },
     formGroup: {
+        position: 'relative',
         marginBottom: '20px',
         width: '100%',
     },
@@ -165,8 +184,14 @@ const styles = {
         boxSizing: 'border-box',
         borderWidth: '2px',
         borderStyle: 'solid',
-        borderColor: '#ccc',
         transition: 'border-color 0.3s ease-in-out',
+        marginBottom: '5px',
+    },
+    invalidInput: {
+        borderColor: 'red',
+    },
+    validInput: {
+        borderColor: 'green',
     },
     small: {
         display: 'block',
@@ -183,4 +208,21 @@ const styles = {
         fontSize: '12px',
         marginTop: '5px',
     },
+    cancelIcon: {
+        position: 'absolute',
+        right: '150px',
+        top: '10px',
+        width: '32px',
+        height: '32px',
+        cursor: 'pointer',
+    },
+    validationIcon: {
+        position: 'absolute',
+        right: '190px',
+        top: '10px',
+        width: '32px',
+        height: '32px',
+    },
 };
+
+export default JoinComponent1;
