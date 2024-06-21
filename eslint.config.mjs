@@ -10,4 +10,10 @@ export default [
     languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } },
   },
   pluginReactConfig,
+  {
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
+  },
 ];
