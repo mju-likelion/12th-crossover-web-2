@@ -189,7 +189,6 @@ const styles = {
     },
     formGroup: {
         position: 'relative',
-        marginBottom: '20px',
         width: '100%',
     },
     input: {
