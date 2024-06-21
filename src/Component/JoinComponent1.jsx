@@ -185,7 +185,6 @@ const styles = {
         padding: '20px',
         width: '600px',
         borderRadius: '10px',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
     },
     formGroup: {
         position: 'relative',
