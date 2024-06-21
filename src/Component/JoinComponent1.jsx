@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import cancleIcon from '../Img/cancelIcon.svg';
+import cancelIcon from '../Img/cancelIcon.svg';
 import errorIcon from '../Img/errorIcon.svg';
 import successIcon from '../Img/successIcon.svg';
 
@@ -49,6 +49,19 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
         return null;
     };
 
+    const renderValidationMessage = (isValid, type, value) => {
+        if (value === '') {
+            return <small style={{ ...styles.small, visibility: 'visible' }}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>;
+        }
+        if (isValid === true) {
+            return <small style={{ ...styles.small, color: 'green', visibility: 'visible' }}>사용 가능한 {type} 입니다.</small>;
+        } else if (isValid === false) {
+            return <small style={{ ...styles.small, color: 'red', visibility: 'visible' }}>{type}를 잘못 입력하셨습니다. 다시 입력해주세요.</small>;
+        }
+        return null;
+    };
+    
+
     return (
         <div style={styles.joinContainer}>
             <h2 style={styles.h2}>회원가입</h2>
@@ -69,12 +82,13 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     }}
                 />
                 <img
-                    src={cancleIcon}
-                    alt="back-icon"
+                    src={cancelIcon}
+                    alt="cancel-icon"
                     style={styles.cancelIcon}
                     onClick={() => clearInput(setId)}
                 />
                 {renderValidationIcon(idValid, id)}
+                {renderValidationMessage(idValid, '아이디', id)}
                 <small style={styles.small}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>
                 {errors.id && <div style={styles.error}>{errors.id}</div>}
             </div>
@@ -95,12 +109,13 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     }}
                 />
                 <img
-                    src={cancleIcon}
-                    alt="back-icon"
+                    src={cancelIcon}
+                    alt="cancel-icon"
                     style={styles.cancelIcon}
                     onClick={() => clearInput(setPassword)}
                 />
                 {renderValidationIcon(passwordValid, password)}
+                {renderValidationMessage(passwordValid, '비밀번호', password)}
                 <small style={styles.small}>영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.</small>
                 {errors.password && <div style={styles.error}>{errors.password}</div>}
             </div>
@@ -121,12 +136,13 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     }}
                 />
                 <img
-                    src={cancleIcon}
-                    alt="back-icon"
+                    src={cancelIcon}
+                    alt="cancel-icon"
                     style={styles.cancelIcon}
                     onClick={() => clearInput(setEmail)}
                 />
                 {renderValidationIcon(emailValid, email)}
+                {renderValidationMessage(emailValid, '이메일', email)}
                 <small style={styles.small}>사용하실 이메일을 입력해주세요.</small>
                 {errors.email && <div style={styles.error}>{errors.email}</div>}
             </div>
@@ -147,12 +163,13 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     }}
                 />
                 <img
-                    src={cancleIcon}
-                    alt="back-icon"
+                    src={cancelIcon}
+                    alt="cancel-icon"
                     style={styles.cancelIcon}
                     onClick={() => clearInput(setName)}
                 />
                 {renderValidationIcon(nameValid, name)}
+                {renderValidationMessage(nameValid, '이름', name)}
                 <small style={styles.small}>이름을 입력해주세요.</small>
                 {errors.name && <div style={styles.error}>{errors.name}</div>}
             </div>
@@ -172,7 +189,6 @@ const styles = {
     },
     formGroup: {
         position: 'relative',
-        marginBottom: '20px',
         width: '100%',
     },
     input: {
@@ -198,6 +214,7 @@ const styles = {
         marginTop: '5px',
         fontSize: '12px',
         color: '#999',
+        visibility: 'hidden',
     },
     h2: {
         textAlign: 'center',
