@@ -55,7 +55,7 @@ function JoinPage() {
   };
 
   return (
-    <div className="container" style={{ width: "600px" }}>
+    <div className="container" style={{ width: "900px" }}>
       <form onSubmit={handleSubmit}>
         <JoinComponent1
           id={id}

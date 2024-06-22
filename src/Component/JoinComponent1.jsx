@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from "prop-types";
+import React, { useState } from 'react';
 import cancelIcon from '../Img/cancelIcon.svg';
 import errorIcon from '../Img/errorIcon.svg';
 import successIcon from '../Img/successIcon.svg';
@@ -198,6 +198,7 @@ const styles = {
         padding: '20px',
         width: '600px',
         borderRadius: '10px',
+        marginLeft: '140px',
     },
     formGroup: {
         position: 'relative',
