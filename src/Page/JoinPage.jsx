@@ -32,10 +32,10 @@ function JoinPage() {
 
     try {
       const response = await axios.post('https://likelion-crossover-team2.com/auth/sign-up', {
-        userId: id,
-        email: email,
-        password: password,
-        name: name
+        userId: "id",
+        email: "email",
+        password: "password",
+        name: "name",
       });
 
       if (response.status === 201) {
