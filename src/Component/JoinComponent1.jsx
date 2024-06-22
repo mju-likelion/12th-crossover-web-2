@@ -242,16 +242,17 @@ const styles = {
         position: 'absolute',
         right: '150px',
         top: '10px',
-        width: '32px',
-        height: '32px',
+        width: '25px',
+        height: '25px',
         cursor: 'pointer',
     },
     validationIcon: {
         position: 'absolute',
-        right: '190px',
+        right: '180px',
         top: '10px',
-        width: '32px',
-        height: '32px',
+        width: '25px',
+        height: '25px',
+
     },
 };
 
