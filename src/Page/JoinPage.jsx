@@ -31,7 +31,7 @@ function JoinPage() {
     }
 
     try {
-      const response = await axios.post('https://your-api-endpoint.com/auth.sign-up', {
+      const response = await axios.post('likelion-crossover-team2.com/auth/sign-up', {
         userId: id,
         email: email,
         password: password,
