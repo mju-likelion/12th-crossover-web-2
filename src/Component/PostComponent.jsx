@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, handleDelete, isReadOnly }) => {
     return (
@@ -65,6 +66,16 @@ const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, han
             </form>
         </div>
     );
+};
+
+PostComponent.propTypes = {
+    title: PropTypes.any.isRequired,
+    setTitle: PropTypes.any.isRequired,
+    content: PropTypes.any.isRequired,
+    setContent: PropTypes.any.isRequired,
+    handleSubmit: PropTypes.any.isRequired,
+    handleDelete: PropTypes.any.isRequired,
+    isReadOnly: PropTypes.any.isRequired
 };
 
 export default PostComponent;

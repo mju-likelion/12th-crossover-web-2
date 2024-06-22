@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import checkBoxIcon from '../Img/checkBox.svg';
 import emptyCheckBoxIcon from '../Img/emptycheckBox.svg';
 
@@ -73,6 +74,12 @@ function JoinComponent2({ agree, setAgree, error }) {
         </div>
     );
 }
+
+JoinComponent2.propTypes = {
+    agree: PropTypes.any.isRequired,
+    setAgree: PropTypes.any.isRequired,
+    error: PropTypes.any.isRequired
+};
 
 export default JoinComponent2;
 

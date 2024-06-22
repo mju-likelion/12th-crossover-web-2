@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const PostPage = ({ setPosts }) => {
@@ -83,6 +84,10 @@ const PostPage = ({ setPosts }) => {
       </form>
     </div>
   );
+};
+
+PostPage.propTypes = {
+  setPosts: PropTypes.any.isRequired,
 };
 
 export default PostPage;

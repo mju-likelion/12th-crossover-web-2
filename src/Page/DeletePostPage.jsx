@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PropTypes from "prop-types";
 import PostComponent from '../Component/PostComponent';
 
 const DeletePostPage = ({ posts, setPosts }) => {
@@ -55,6 +56,11 @@ const DeletePostPage = ({ posts, setPosts }) => {
             isReadOnly={true}
         />
     );
+};
+
+DeletePostPage.propTypes = {
+    posts: PropTypes.any.isRequired,
+    setPosts: PropTypes.any.isRequired
 };
 
 export default DeletePostPage;

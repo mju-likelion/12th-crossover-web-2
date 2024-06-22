@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
 const MainPage = ({ posts, setPosts }) => {
@@ -56,6 +57,11 @@ const MainPage = ({ posts, setPosts }) => {
             {loading && <p>Loading...</p>}
         </div>
     );
+};
+
+MainPage.propTypes = {
+    posts: PropTypes.any.isRequired,
+    setPosts: PropTypes.any.isRequired
 };
 
 export default MainPage;

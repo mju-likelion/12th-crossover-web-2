@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import '../commonComponent/commonComponent.css';
 
 function LoginComponent({ id, setId, password, setPassword }) {
@@ -30,6 +31,13 @@ function LoginComponent({ id, setId, password, setPassword }) {
         </div>
     );
 }
+
+LoginComponent.propTypes = {
+    id: PropTypes.any.isRequired,
+    setId: PropTypes.any.isRequired,
+    password: PropTypes.any.isRequired,
+    setPassword: PropTypes.any.isRequired
+};
 
 export default LoginComponent;
 

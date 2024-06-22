@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
 import cancelIcon from '../Img/cancelIcon.svg';
 import errorIcon from '../Img/errorIcon.svg';
 import successIcon from '../Img/successIcon.svg';
@@ -176,6 +177,18 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
         </div>
     );
 }
+
+JoinComponent1.propTypes = {
+    id: PropTypes.any.isRequired,
+    setId: PropTypes.any.isRequired,
+    password: PropTypes.any.isRequired,
+    setPassword: PropTypes.any.isRequired,
+    email: PropTypes.any.isRequired,
+    setEmail: PropTypes.any.isRequired,
+    name: PropTypes.any.isRequired,
+    setName: PropTypes.any.isRequired,
+    errors: PropTypes.any.isRequired
+};
 
 const styles = {
     joinContainer: {
