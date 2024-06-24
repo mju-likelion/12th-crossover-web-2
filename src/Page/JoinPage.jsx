@@ -32,8 +32,6 @@ function JoinPage() {
           } else {
             alert('약관 내용을 찾을 수 없습니다.');
           }
-        } else {
-          alert('회원가입 페이지 조회에 실패했습니다.');
         }
       } catch (error) {
         console.error('회원가입 페이지 조회 오류:', error);
@@ -72,12 +70,11 @@ function JoinPage() {
           name: name,
         }),
       });
-
-      if (response.status === 201) {
+      const data = await response.json();
+      if (data.success) {
         alert('회원가입에 성공하였습니다.');
         navigate("/");
       } else {
-        const data = await response.json();
         alert('회원가입에 실패했습니다. 다시 시도해 주세요.');
         setErrors(data.errors || {});
       }
