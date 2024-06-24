@@ -33,7 +33,7 @@ function JoinPage() {
       const response = await fetch('likelion-crossover-team2.com/join', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json',ㅊㄷ
         },
         body: JSON.stringify({
           userId: id,
