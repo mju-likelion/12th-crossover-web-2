@@ -25,10 +25,12 @@ function JoinPage() {
           },
         });
 
-        if (response.status === 200) {
+        if (response.ok) {
           const data = await response.json();
           if (data.data && data.data.clauseDtos && data.data.clauseDtos.length > 0) {
             setClauseContent(data.data.clauseDtos[0].content);
+          } else {
+            alert('약관 내용을 찾을 수 없습니다.');
           }
         } else {
           alert('회원가입 페이지 조회에 실패했습니다.');
@@ -103,7 +105,7 @@ function JoinPage() {
           agree={agree}
           setAgree={setAgree}
           error={errors.agree}
-          clauseContent={clauseContent}
+          policyText={clauseContent}
         />
         <button type="submit" className="submit-btn">
           완료하기
