@@ -11,16 +11,18 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
     const [nameValid, setNameValid] = useState(true);
 
     const validateId = (value) => {
-        const isValid = /^[a-zA-Z0-9]{5,10}$/.test(value);
+        const isValid = /^[a-zA-Z]+[a-zA-Z0-9]{4,9}$/.test(value);
         setIdValid(isValid);
         return isValid;
     };
+    
 
     const validatePassword = (value) => {
-        const isValid = /^[a-zA-Z0-9!@#$%^&*()_+]{8,14}$/.test(value);
+        const isValid = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]{8,14}$/.test(value);
         setPasswordValid(isValid);
         return isValid;
     };
+    
 
     const validateEmail = (value) => {
         const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -40,28 +42,36 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
 
     const renderValidationIcon = (isValid, value) => {
         if (value === '') {
-            return null; // 값이 비어 있으면 아이콘 숨김
+            return null;
         }
-        if (isValid === true) {
-            return <img src={successIcon} alt="check-icon" style={styles.validationIcon} />;
-        } else if (isValid === false) {
-            return <img src={errorIcon} alt="error-icon" style={styles.validationIcon} />;
-        }
-        return null;
+        return <img src={isValid ? successIcon : errorIcon} alt={isValid ? "check-icon" : "error-icon"} style={styles.validationIcon} />;
     };
 
     const renderValidationMessage = (isValid, type, value) => {
-        if (value === '') {
-            return <small style={{ ...styles.small, visibility: 'visible' }}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>;
+        let description = '';
+        switch (type) {
+            case '아이디':
+                description = '영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.';
+                break;
+            case '비밀번호':
+                description = '영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.';
+                break;
+            case '이메일':
+                description = '사용하실 이메일을 입력해주세요.';
+                break;
+            case '이름':
+                description = '이름을 입력해주세요.';
+                break;
+            default:
+                description = '입력해 주세요.';
+                break;
         }
-        if (isValid === true) {
-            return <small style={{ ...styles.small, color: 'green', visibility: 'visible' }}>사용 가능한 {type} 입니다.</small>;
-        } else if (isValid === false) {
-            return <small style={{ ...styles.small, color: 'red', visibility: 'visible' }}>{type}를 잘못 입력하셨습니다. 다시 입력해주세요.</small>;
-        }
-        return null;
-    };
     
+        if (value === '') {
+            return <small style={{ ...styles.small, visibility: 'visible' }}>{description}</small>;
+        }
+        return <small style={{ ...styles.small, color: isValid ? 'green' : 'red', visibility: 'visible' }}>{isValid ? `사용 가능한 ${type} 입니다.` : description}</small>;
+    };
 
     return (
         <div style={styles.joinContainer}>
@@ -75,11 +85,10 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        ...(idValid ? styles.validInput : styles.invalidInput),
+                        borderColor: idValid ? 'gray' : 'red',
                     }}
                     onBlur={(e) => {
-                        const isValid = validateId(e.target.value);
-                        setIdValid(isValid);
+                        validateId(e.target.value);
                     }}
                 />
                 <img
@@ -90,7 +99,6 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                 />
                 {renderValidationIcon(idValid, id)}
                 {renderValidationMessage(idValid, '아이디', id)}
-                <small style={styles.small}>영문과 숫자를 조합하여 5~10글자 미만으로 입력하여 주세요.</small>
                 {errors.id && <div style={styles.error}>{errors.id}</div>}
             </div>
             <div style={styles.formGroup}>
@@ -102,11 +110,10 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        ...(passwordValid ? styles.validInput : styles.invalidInput),
+                        borderColor: passwordValid ? 'gray' : 'red',
                     }}
                     onBlur={(e) => {
-                        const isValid = validatePassword(e.target.value);
-                        setPasswordValid(isValid);
+                        validatePassword(e.target.value);
                     }}
                 />
                 <img
@@ -117,7 +124,6 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                 />
                 {renderValidationIcon(passwordValid, password)}
                 {renderValidationMessage(passwordValid, '비밀번호', password)}
-                <small style={styles.small}>영문과 숫자, 특수기호를 조합하여 8~14글자 미만으로 입력하여 주세요.</small>
                 {errors.password && <div style={styles.error}>{errors.password}</div>}
             </div>
             <div style={styles.formGroup}>
@@ -129,11 +135,10 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        ...(emailValid ? styles.validInput : styles.invalidInput),
+                        borderColor: emailValid ? 'gray' : 'red',
                     }}
                     onBlur={(e) => {
-                        const isValid = validateEmail(e.target.value);
-                        setEmailValid(isValid);
+                        validateEmail(e.target.value);
                     }}
                 />
                 <img
@@ -144,7 +149,6 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                 />
                 {renderValidationIcon(emailValid, email)}
                 {renderValidationMessage(emailValid, '이메일', email)}
-                <small style={styles.small}>사용하실 이메일을 입력해주세요.</small>
                 {errors.email && <div style={styles.error}>{errors.email}</div>}
             </div>
             <div style={styles.formGroup}>
@@ -156,11 +160,10 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                     required
                     style={{
                         ...styles.input,
-                        ...(nameValid ? styles.validInput : styles.invalidInput),
+                        borderColor: nameValid ? 'gray' : 'red',
                     }}
                     onBlur={(e) => {
-                        const isValid = validateName(e.target.value);
-                        setNameValid(isValid);
+                        validateName(e.target.value);
                     }}
                 />
                 <img
@@ -171,7 +174,6 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
                 />
                 {renderValidationIcon(nameValid, name)}
                 {renderValidationMessage(nameValid, '이름', name)}
-                <small style={styles.small}>이름을 입력해주세요.</small>
                 {errors.name && <div style={styles.error}>{errors.name}</div>}
             </div>
         </div>
@@ -179,15 +181,15 @@ function JoinComponent1({ id, setId, password, setPassword, email, setEmail, nam
 }
 
 JoinComponent1.propTypes = {
-    id: PropTypes.any.isRequired,
-    setId: PropTypes.any.isRequired,
-    password: PropTypes.any.isRequired,
-    setPassword: PropTypes.any.isRequired,
-    email: PropTypes.any.isRequired,
-    setEmail: PropTypes.any.isRequired,
-    name: PropTypes.any.isRequired,
-    setName: PropTypes.any.isRequired,
-    errors: PropTypes.any.isRequired
+    id: PropTypes.string.isRequired,
+    setId: PropTypes.func.isRequired,
+    password: PropTypes.string.isRequired,
+    setPassword: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired,
+    setEmail: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    setName: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const styles = {
@@ -205,9 +207,9 @@ const styles = {
         width: '100%',
     },
     input: {
-        width: '330px',
-        height: '50px',
-        padding: '10px',
+        width: '370px',
+        height: '60px',
+        padding: '25px',
         fontSize: '16px',
         borderRadius: '15px',
         boxSizing: 'border-box',
@@ -215,16 +217,14 @@ const styles = {
         borderStyle: 'solid',
         transition: 'border-color 0.3s ease-in-out',
         marginBottom: '5px',
-    },
-    invalidInput: {
-        borderColor: 'red',
-    },
-    validInput: {
-        borderColor: 'green',
+        borderColor: 'gray',
     },
     small: {
         display: 'block',
         marginTop: '5px',
+        marginBottom: '15px',
+        marginLeft: '140px',
+        textAlign: 'left',
         fontSize: '12px',
         color: '#999',
         visibility: 'hidden',
@@ -240,19 +240,18 @@ const styles = {
     },
     cancelIcon: {
         position: 'absolute',
-        right: '150px',
+        right: '130px',
         top: '10px',
         width: '25px',
-        height: '25px',
+        height: '35px',
         cursor: 'pointer',
     },
     validationIcon: {
         position: 'absolute',
-        right: '180px',
+        right: '160px',
         top: '10px',
         width: '25px',
-        height: '25px',
-
+        height: '35px',
     },
 };
 
