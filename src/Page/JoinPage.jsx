@@ -18,7 +18,7 @@ function JoinPage() {
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await fetch('likelion-crossover-team2.com/auth/sign-up', {
+        const response = await fetch('/auth/sign-up', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function JoinPage() {
     }
 
     try {
-      const response = await fetch('likelion-crossover-team2.com/auth/sign-up', {
+      const response = await fetch('/auth/sign-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
