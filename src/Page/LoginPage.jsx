@@ -19,7 +19,8 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!isValid) {
+    //검사시 아이디와 비밀번호 칸이 올바르게 되있어야함 
+    if (isValid) {
       alert("아이디와 비밀번호를 올바르게 입력해주세요.");
       return;
     }
@@ -44,6 +45,7 @@ function LoginPage() {
             alert('로그인 중 오류가 발생했습니다.');
         }
       }
+      
   };
 
   const handleSignUp = () => {
