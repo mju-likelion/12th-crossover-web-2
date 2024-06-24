@@ -7,46 +7,16 @@ const PostPage = ({ setPosts }) => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
     const newPost = {
-      title: title,
-      content: content,
+      id: `new-${Date.now()}`,
+      title,
+      body: content,
+      time: new Date().toLocaleTimeString(),
     };
-
-    try {
-      const response = await fetch(`https://api.likelion-crossover-team2.com/boards`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newPost),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result); // 서버에서 받은 응답 출력 (예: { "statusCode": "201", "message": "게시글 작성을 완료하였습니다.", "data": null })
-        
-        // 새로운 게시물 객체 생성
-        const createdPost = {
-          id: `new-${Date.now()}`,
-          title: title,
-          body: content,
-          time: new Date().toLocaleTimeString(),
-        };
-        
-        // 기존 게시물 배열에 새로운 게시물 추가
-        setPosts((prevPosts) => [createdPost, ...prevPosts]);
-        
-        // 메인 페이지로 이동
-        navigate("/main");
-      } else {
-        console.error('Failed to create the post');
-      }
-    } catch (error) {
-      console.error('Error creating the post:', error);
-    }
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
+    navigate("/main");
   };
 
   const isButtonDisabled = title === "" || content === "";
@@ -117,7 +87,7 @@ const PostPage = ({ setPosts }) => {
 };
 
 PostPage.propTypes = {
-  setPosts: PropTypes.func.isRequired,
+  setPosts: PropTypes.any.isRequired,
 };
 
 export default PostPage;
