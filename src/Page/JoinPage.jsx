@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../commonComponent/commonComponent.css";
@@ -31,26 +30,30 @@ function JoinPage() {
     }
 
     try {
-      const response = await axios.post('https://likelion-crossover-team2.com/auth/sign-up', {
-        userId: "id",
-        email: "email",
-        password: "password",
-        name: "name",
+      const response = await fetch('likelion-crossover-team2.com/auth/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: id,
+          email: email,
+          password: password,
+          name: name,
+        }),
       });
 
       if (response.status === 201) {
         alert('회원가입에 성공하였습니다.');
         navigate("/");
       } else {
+        const data = await response.json();
         alert('회원가입에 실패했습니다. 다시 시도해 주세요.');
-        setErrors(response.data.errors);
+        setErrors(data.errors || {});
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        setErrors(error.response.data.errors);
-      } else {
-        alert('회원가입 중 오류가 발생했습니다.');
-      }
+      console.error('회원가입 오류:', error);
+      alert('회원가입 중 오류가 발생했습니다.');
     }
   };
 
