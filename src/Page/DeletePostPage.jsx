@@ -11,7 +11,7 @@ const DeletePostPage = ({ posts, setPosts }) => {
     const handleDelete = async (confirm) => {
         if (confirm) {
             try {
-                const response = await fetch(`/boards/${postId}`, {
+                const response = await fetch(`likelion-crossover-team2.com/boards/${postId}`, {
                     method: 'DELETE'
                 });
 
