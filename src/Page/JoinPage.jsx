@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
@@ -11,8 +11,36 @@ function JoinPage() {
   const [name, setName] = useState("");
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const [clauseContent, setClauseContent] = useState("");
+  
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchClauseContent() {
+      try {
+        const response = await fetch('likelion-crossover-team2.com/auth/sign-up', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.status === 200) {
+          const data = await response.json();
+          if (data.data && data.data.clauseDtos && data.data.clauseDtos.length > 0) {
+            setClauseContent(data.data.clauseDtos[0].content);
+          }
+        } else {
+          alert('회원가입 페이지 조회에 실패했습니다.');
+        }
+      } catch (error) {
+        console.error('회원가입 페이지 조회 오류:', error);
+        alert('회원가입 페이지 조회 중 오류가 발생했습니다.');
+      }
+    }
+
+    fetchClauseContent();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,10 +58,10 @@ function JoinPage() {
     }
 
     try {
-      const response = await fetch('likelion-crossover-team2.com/join', {
+      const response = await fetch('likelion-crossover-team2.com/auth/sign-up', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',ㅊㄷ
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           userId: id,
@@ -75,6 +103,7 @@ function JoinPage() {
           agree={agree}
           setAgree={setAgree}
           error={errors.agree}
+          clauseContent={clauseContent}
         />
         <button type="submit" className="submit-btn">
           완료하기
