@@ -71,7 +71,7 @@ const styles = {
     },
     policyContainer: {
         width: '100%',
-        height: '250px',
+        height: '300px',
         padding: '10px',
         fontSize: '14px',
         borderRadius: '15px',

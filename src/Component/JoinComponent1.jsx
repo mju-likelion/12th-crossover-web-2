@@ -198,9 +198,8 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '20px',
-        width: '600px',
+        width: '800px',
         borderRadius: '10px',
-        marginLeft: '140px',
     },
     formGroup: {
         position: 'relative',
@@ -223,7 +222,7 @@ const styles = {
         display: 'block',
         marginTop: '5px',
         marginBottom: '15px',
-        marginLeft: '140px',
+        marginLeft: '240px',
         textAlign: 'left',
         fontSize: '12px',
         color: '#999',
@@ -240,7 +239,7 @@ const styles = {
     },
     cancelIcon: {
         position: 'absolute',
-        right: '130px',
+        right: '230px',
         top: '10px',
         width: '25px',
         height: '35px',
@@ -248,7 +247,7 @@ const styles = {
     },
     validationIcon: {
         position: 'absolute',
-        right: '160px',
+        right: '260px',
         top: '10px',
         width: '25px',
         height: '35px',
