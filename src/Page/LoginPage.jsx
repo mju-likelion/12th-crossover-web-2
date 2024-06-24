@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "../commonComponent/commonComponent.css";
@@ -25,7 +25,7 @@ function LoginPage() {
     }
     else {
     try {
-          const response = await fetch('likelion-crossover-team2.com/auth/login', {
+          const response = await fetch('api.likelion-crossover-team2.com/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

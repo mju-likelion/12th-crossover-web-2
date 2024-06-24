@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
 import JoinComponent2 from "../Component/JoinComponent2";
-
 function JoinPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -14,11 +13,11 @@ function JoinPage() {
   const [clauseContent, setClauseContent] = useState("");
   
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await fetch('/auth/sign-up', {
+        const response = await fetch('https://api.likelion-crossover-team2.com/auth/sign-up', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ function JoinPage() {
     }
 
     try {
-      const response = await fetch('/auth/sign-up', {
+      const response = await fetch('https://api.likelion-crossover-team2.com/auth/sign-up', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
