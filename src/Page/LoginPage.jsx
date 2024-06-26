@@ -25,12 +25,12 @@ function LoginPage() {
     }
     else {
     try {
-          const response = await fetch('likelion-crossover-team2.com/auth/login', {
+          const response = await fetch('https://api.likelion-crossover-team2.com/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId: id, password: password }),
+            body: JSON.stringify({ id: id, password: password }),
             });
             const data = await response.json();
 

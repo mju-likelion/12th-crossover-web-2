@@ -1,6 +1,7 @@
+import React from "react";
 import styled from "styled-components";
-import logo from "../Img/logoImg.png";
-import logout from "../Img/logoutIcon.png";
+import logo from "../Img/logoImge.svg";
+import logout from "../Img/logoutIcon.svg";
 
 const Header = () => {
   return (
