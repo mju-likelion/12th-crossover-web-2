@@ -72,6 +72,7 @@ function JoinPage() {
       });
 
       if (response.ok) {
+        alert('회원가입 성공.');
         navigate('/');  // 메인 페이지로 이동
       } else {
         const errorData = await response.json();
