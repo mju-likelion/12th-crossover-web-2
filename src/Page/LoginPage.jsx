@@ -26,7 +26,7 @@ function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: ids, password: password }),
+        body: JSON.stringify({ id: id, password: password }),
       });
       if (response.ok) {
         alert('로그인.');
