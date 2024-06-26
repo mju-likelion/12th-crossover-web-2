@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
 import JoinComponent2 from "../Component/JoinComponent2";
+
 function JoinPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -11,9 +12,9 @@ function JoinPage() {
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState({});
   const [clauseContent, setClauseContent] = useState("");
-  
+
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     async function fetchClauseContent() {
       try {
@@ -69,13 +70,12 @@ function JoinPage() {
           name: name,
         }),
       });
-      const data = await response.json();
-      if (data.success) {
-        alert('회원가입에 성공하였습니다.');
-        navigate("/");
+
+      if (response.ok) {
+        navigate('/');  // 메인 페이지로 이동
       } else {
-        alert('회원가입에 실패했습니다. 다시 시도해 주세요.');
-        setErrors(data.errors || {});
+        const errorData = await response.json();
+        alert(`회원가입 실패: ${errorData.message}`);
       }
     } catch (error) {
       console.error('회원가입 오류:', error);
