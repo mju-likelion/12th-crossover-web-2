@@ -29,11 +29,11 @@ function LoginPage() {
         body: JSON.stringify({ id: id, password: password }),
       });
       if (response.ok) {
-        alert('회원가입 성공.');
+        alert('로그인.');
         navigate('/main');
       } else {
         const errorData = await response.json();
-        alert(`회원가입 실패: ${errorData.message}`);
+        alert(`로그인 실패: ${errorData.message}`);
       }
     } catch (error) {
       console.error('로그인 오류:', error);
