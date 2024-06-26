@@ -26,7 +26,7 @@ function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId: id, password: password }),
+        body: JSON.stringify({ id: id, password: password }),
       });
       const data = await response.json();
 
