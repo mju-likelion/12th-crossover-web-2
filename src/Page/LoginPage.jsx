@@ -28,12 +28,12 @@ function LoginPage() {
         },
         body: JSON.stringify({ id: id, password: password }),
       });
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.ok) {
+        alert('회원가입 성공.');
         navigate('/main');
       } else {
-        alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+        const errorData = await response.json();
+        alert(`회원가입 실패: ${errorData.message}`);
       }
     } catch (error) {
       console.error('로그인 오류:', error);
