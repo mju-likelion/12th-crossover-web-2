@@ -11,21 +11,17 @@ const DeletePostPage = ({ posts, setPosts }) => {
     const handleDelete = async (confirm) => {
         if (confirm) {
             try {
-                const response = await fetch(`/boards/${postId}`, {
+                const response = await fetch(`https://api.likelion-crossover-team2.com/boards/{board-id}`, {
                     method: 'DELETE'
                 });
-
                 if (response.ok) {
-                    // Remove the deleted post from the local state
                     setPosts((prevPosts) => prevPosts.filter((p) => p.id !== postId));
                     navigate('/main');
                 } else {
                     console.error('Failed to delete the post');
-                    // Handle error if needed
                 }
             } catch (error) {
                 console.error('Error deleting the post:', error);
-                // Handle error if needed
             }
         }
     };

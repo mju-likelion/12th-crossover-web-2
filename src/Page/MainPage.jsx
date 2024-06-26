@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from "prop-types";
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MainPage = ({ posts, setPosts }) => {
@@ -44,7 +44,7 @@ const MainPage = ({ posts, setPosts }) => {
         <div style={styles.container}>
             <button style={styles.postButton} onClick={() => navigate('/post')}>작성하기</button>
             {posts.map((post, index) => (
-                <div key={index} style={styles.post} onClick={() => handlePostClick(post.id)}>                    
+                <div key={index} style={styles.post} onClick={() => handlePostClick(post.id)}>
                     <div style={styles.postContent}>
                         <div style={styles.postTitle}>
                             <strong>{post.title}</strong>
@@ -72,7 +72,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
         padding: '20px',
     },
     postButton: {
@@ -90,13 +89,14 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        width: '500px',
+        width: '783px',
+        height: '343px',
         backgroundColor: '#fff',
-        borderRadius: '10px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        borderRadius: '25px',
         padding: '20px',
         marginBottom: '20px',
         cursor: 'pointer',
+        border: '2px solid #717171',
     },
     postContent: {
         display: 'flex',
