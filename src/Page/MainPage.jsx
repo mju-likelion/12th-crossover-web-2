@@ -1,14 +1,21 @@
+import Cookies from 'js-cookie';
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-//import GrayProfile from "../assets/images/gray_profile.svg";
-import BlueProfile from "../Img/profile.svg";
+import BlueProfile from '../Img/profile.svg';
 
 const MainPage = ({ posts, setPosts }) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const userToken = Cookies.get('userToken');
+        if (!userToken) {
+            navigate('/');
+        }
+    }, [navigate]);
 
     const fetchPosts = useCallback(() => {
         setLoading(true);
@@ -70,11 +77,9 @@ const MainPage = ({ posts, setPosts }) => {
 };
 
 MainPage.propTypes = {
-    posts: PropTypes.any.isRequired,
-    setPosts: PropTypes.any.isRequired
+    posts: PropTypes.array.isRequired,
+    setPosts: PropTypes.func.isRequired,
 };
-
-export default MainPage;
 
 const Container = styled.div`
     display: flex;
@@ -132,7 +137,6 @@ const ProfileBox = styled.div`
     height: 239px;
     display: flex;
     justify-content: right;
-    
 `;
 
 const TextBox = styled.div`
@@ -188,3 +192,5 @@ const Loading = styled.p`
     font-size: 18px;
     color: gray;
 `;
+
+export default MainPage;
