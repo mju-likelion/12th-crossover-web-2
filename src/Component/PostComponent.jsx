@@ -1,176 +1,175 @@
-import React from 'react';
 import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
 
 const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, handleDelete, isReadOnly }) => {
     return (
-        <div style={styles.container}>
-            <form onSubmit={handleSubmit} style={styles.form}>
-                <div style={styles.formGroup}>
-                    <label style={styles.label}>
+        <Container>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label>
                         {isReadOnly ? title : ""}
-                        <span style={styles.count}>({title.length} / 20)</span>
-                    </label>
+                        <Count>({title.length} / 20)</Count>
+                    </Label>
                     {!isReadOnly && (
-                        <input
+                        <Input
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            style={styles.input}
                             maxLength="20"
                             required
                         />
                     )}
-                </div>
-                <div style={styles.formGroup}>
-                    <textarea
+                </FormGroup>
+                <FormGroup>
+                    <TextArea
                         value={content}
                         onChange={isReadOnly ? null : (e) => setContent(e.target.value)}
-                        style={styles.textarea}
                         maxLength="140"
                         readOnly={isReadOnly}
                         required
                     />
-                    <span style={styles.count}>({content.length} / 140)</span>
-                </div>
-                <p style={styles.note}>※ 작성된 게시글은 수정이 불가합니다.</p>
-                <div style={styles.buttonGroup}>
-                    <button
+                    <Count>({content.length} / 140)</Count>
+                </FormGroup>
+                <Note>※ 작성된 게시글은 수정이 불가합니다.</Note>
+                <ButtonGroup>
+                    <BackButton
                         type="button"
-                        style={styles.backButton}
                         onClick={() => handleDelete()}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = styles.backButtonHover.backgroundColor}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = styles.backButton.backgroundColor}
                     >
                         뒤로가기
-                    </button>
+                    </BackButton>
                     {!isReadOnly ? (
-                        <button
+                        <Button
                             type="submit"
-                            style={styles.button}
-                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor}
-                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
                         >
                             작성하기
-                        </button>
+                        </Button>
                     ) : (
-                        <button
-                            style={styles.button}
+                        <Button
                             onClick={() => handleDelete(true)}
-                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor}
-                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
                         >
                             삭제하기
-                        </button>
+                        </Button>
                     )}
-                </div>
-            </form>
-        </div>
+                </ButtonGroup>
+            </Form>
+        </Container>
     );
 };
 
 PostComponent.propTypes = {
-    title: PropTypes.any.isRequired,
-    setTitle: PropTypes.any.isRequired,
-    content: PropTypes.any.isRequired,
-    setContent: PropTypes.any.isRequired,
-    handleSubmit: PropTypes.any.isRequired,
-    handleDelete: PropTypes.any.isRequired,
-    isReadOnly: PropTypes.any.isRequired
+    title: PropTypes.string.isRequired,
+    setTitle: PropTypes.func.isRequired,
+    content: PropTypes.string.isRequired,
+    setContent: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    isReadOnly: PropTypes.bool.isRequired
 };
 
 export default PostComponent;
 
-const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '794px',
-        padding: '20px',
-        borderRadius: '10px',
-    },
-    formGroup: {
-        marginBottom: '25px',
-        position: 'relative',
-        borderRadius: '15px',
-        border: '2px solid #717171',
-        padding: '10px',
-    },
-    label: {
-        marginBottom: '5px',
-        fontWeight: 'bold',
-        display: 'flex',
-        alignItems: 'center',
-        height: '50px',
-    },
-    input: {
-        width: '100%',
-        padding: '10px',
-        fontSize: '16px',
-        borderRadius: '15px',
-    },
-    textarea: {
-        width: '100%',
-        fontSize: '16px',
-        borderRadius: '15px',
-        resize: 'none',
-        height: '550px',
-        padding: '10px',
-        boxSizing: 'border-box',
-        border: 'none',
-    },
-    count: {
-        position: 'absolute',
-        bottom: '5px',
-        right: '10px',
-        fontSize: '12px',
-        color: '#999',
-        marginBottom: '10px',
-    },
-    note: {
-        fontSize: '12px',
-        color: '#999',
-        textAlign: 'left',
-        width: '100%',
-        marginTop: '10px',
-    },
-    buttonGroup: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '100%',
-    },
-    button: {
-        width: '150px',
-        height: '50px',
-        backgroundColor: '#99CEFF',
-        color: 'white',
-        padding: '10px 20px',
-        border: 'none',
-        borderRadius: '15px',
-        cursor: 'pointer',
-        fontSize: '16px',
-    },
-    buttonHover: {
-        backgroundColor: 'rgb(154, 154, 216)',
-    },
-    backButton: {
-        width: '150px',
-        backgroundColor: '#888888',
-        color: 'white',
-        padding: '10px 20px',
-        border: 'none',
-        borderRadius: '15px',
-        cursor: 'pointer',
-        fontSize: '16px',
-    },
-    backButtonHover: {
-        backgroundColor: '#666666',
-    },
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+`;
 
-};
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    width: 794px;
+    padding: 20px;
+    border-radius: 10px;
+`;
+
+const FormGroup = styled.div`
+    margin-bottom: 25px;
+    position: relative;
+    border-radius: 15px;
+    border: 2px solid #717171;
+    padding: 10px;
+`;
+
+const Label = styled.label`
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 50px;
+`;
+
+const Input = styled.input`
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+`;
+
+const TextArea = styled.textarea`
+    width: 100%;
+    font-size: 16px;
+    border-radius: 15px;
+    resize: none;
+    height: 550px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+`;
+
+const Count = styled.span`
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+`;
+
+const Note = styled.p`
+    font-size: 12px;
+    color: #999;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+`;
+
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+`;
+
+const Button = styled.button`
+    width: 150px;
+    height: 50px;
+    background-color: #99CEFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        background-color: rgb(154, 154, 216);
+    }
+`;
+
+const BackButton = styled.button`
+    width: 150px;
+    background-color: #888888;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        background-color: #666666;
+    }
+`;

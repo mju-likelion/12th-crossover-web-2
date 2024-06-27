@@ -11,9 +11,9 @@ const PostPage = ({ setPosts }) => {
     e.preventDefault();
     const newPost = {
       id: `new-${Date.now()}`,
-      title,
+      title: `제목 : ${title}`,
       body: content,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
     };
     setPosts((prevPosts) => [newPost, ...prevPosts]);
     navigate("/main");
