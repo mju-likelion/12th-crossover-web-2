@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import logo from "../Img/logoImge.svg";
@@ -7,7 +8,7 @@ const Header = () => {
   return (
     <HeaderContent>
       <LogoImage src={logo} alt="헤더 로고" />
-      <LogoutButton src={logout} />
+      <LogoutButton src={logout} alt="로그아웃 버튼" />
     </HeaderContent>
   );
 };
@@ -32,5 +33,16 @@ const LogoutButton = styled.img`
   margin: 10px 50px;
   cursor: pointer;
 `;
+
+
+LogoImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string
+};
+
+LogoutButton.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string
+};
 
 export default Header;
