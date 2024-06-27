@@ -1,3 +1,4 @@
+import Cookies from "js-cookie"; // js-cookie 라이브러리 추가
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -29,7 +30,9 @@ function LoginPage() {
         body: JSON.stringify({ id: id, password: password }),
       });
       if (response.ok) {
-        alert('로그인.');
+        alert('로그인 성공.');
+        const data = await response.json();
+        Cookies.set('userToken', data.token);
         navigate('/main');
       } else {
         const errorData = await response.json();
