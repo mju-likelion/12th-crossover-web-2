@@ -95,7 +95,7 @@ const PostButton = styled.button`
     height: 70px;
     background: #2186FC;
     border-radius: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 `;
 
 const PostWrapper = styled.div`
@@ -108,7 +108,7 @@ const PostWrapper = styled.div`
     background-color: #fff;
     border-radius: 25px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     cursor: pointer;
     border: 2px solid #717171;
 `;
@@ -132,6 +132,7 @@ const ProfileBox = styled.div`
     height: 239px;
     display: flex;
     justify-content: right;
+    
 `;
 
 const TextBox = styled.div`
