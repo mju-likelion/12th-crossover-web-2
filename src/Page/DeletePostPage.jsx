@@ -29,13 +29,11 @@ const DeletePostPage = ({ posts, setPosts }) => {
     if (!post) {
         return (
             <div style={styles.container}>
-                <p>게시물을 찾을 수 없습니다.</p>
+                <p>게시물이 삭제되었습니다.</p>
                 <button
                     type="button"
                     style={styles.backButton}
                     onClick={() => navigate('/main')}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = styles.backButtonHover.backgroundColor}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = styles.backButton.backgroundColor}
                 >
                     뒤로가기
                 </button>
@@ -55,8 +53,8 @@ const DeletePostPage = ({ posts, setPosts }) => {
 };
 
 DeletePostPage.propTypes = {
-    posts: PropTypes.any.isRequired,
-    setPosts: PropTypes.any.isRequired
+    posts: PropTypes.array.isRequired,
+    setPosts: PropTypes.func.isRequired
 };
 
 export default DeletePostPage;
@@ -78,8 +76,5 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-    },
-    backButtonHover: {
-        backgroundColor: '#666666',
     },
 };

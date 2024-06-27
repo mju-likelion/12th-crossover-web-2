@@ -160,6 +160,8 @@ const Title = styled.p`
     height: 24px;
     font-weight: 600;
     font-size: 24px;
+    display: flex;
+    justify-content: flex-start;
 `;
 
 const ContentBox = styled.p`
@@ -178,6 +180,8 @@ const Contents = styled.p`
     width: 550px;
     height: 162px;
     margin: 20px;
+    display: flex;
+    justify-content: flex-start;
 `;
 
 const Loading = styled.p`
