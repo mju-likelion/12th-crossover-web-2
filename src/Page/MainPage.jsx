@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Axios from '../Api/Axios.js';
 import BlueProfile from '../Img/profile.svg';
 
 const MainPage = ({ posts, setPosts }) => {
@@ -17,18 +18,25 @@ const MainPage = ({ posts, setPosts }) => {
         }
     }, [navigate]);
 
-    const fetchPosts = useCallback(() => {
+    const fetchPosts = useCallback(async () => {
         setLoading(true);
-        setTimeout(() => {
-            const newPosts = Array.from({ length: 10 }, (_, index) => ({
+        try {
+            const response = await Axios.get(`/boards?page=${page}`);
+            const { data } = response.data;
+
+            const newPosts = data.boardList.map((board, index) => ({
                 id: `fetched-${(page - 1) * 10 + index + 1}`,
-                title: '제목 : text',
-                body: 'text',
+                title: board.title,
+                body: board.content,
                 time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
             }));
+
             setPosts((prevPosts) => [...prevPosts, ...newPosts]);
             setLoading(false);
-        }, 1000);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+            setLoading(false);
+        }
     }, [page, setPosts]);
 
     useEffect(() => {
