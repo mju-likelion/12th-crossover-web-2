@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate import 추가
 import styled from 'styled-components';
 
 const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, handleDelete, isReadOnly }) => {
+    const navigate = useNavigate(); // useNavigate 훅 사용
+
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
@@ -35,7 +38,7 @@ const PostComponent = ({ title, setTitle, content, setContent, handleSubmit, han
                 <ButtonGroup>
                     <BackButton
                         type="button"
-                        onClick={() => handleDelete()}
+                        onClick={() => navigate('/main')} // 뒤로가기 클릭 시 '/main' 페이지로 이동
                     >
                         뒤로가기
                     </BackButton>
@@ -172,4 +175,5 @@ const BackButton = styled.button`
     &:hover {
         background-color: #666666;
     }
+    
 `;
