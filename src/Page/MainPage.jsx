@@ -1,12 +1,10 @@
-// MainPage.jsx
-
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../Api/Axios';
-import Modal from '../Component/ModalComponenet.jsx';
+import Modal from '../Component/ModalComponent';
 import BlueProfile from '../Img/profile.svg';
 
 const MainPage = ({ posts, setPosts }) => {

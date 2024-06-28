@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import logo from "../Img/logoImge.svg";
 import logout from "../Img/logoutIcon.svg";
 import { useAuth } from "./AuthContext";
