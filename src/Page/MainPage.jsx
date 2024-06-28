@@ -21,12 +21,7 @@ const MainPage = ({ posts, setPosts }) => {
     const fetchPosts = useCallback(async () => {
         setLoading(true);
         try {
-            const userToken = Cookies.get('userToken');
-            const response = await Axios.get(`/boards?page=${page}`, {
-                headers: {
-                    Authorization: `Bearer ${userToken}`
-                }
-            });
+            const response = await Axios.get(`/boards?page=${page}`);
             const { data } = response.data;
 
             const newPosts = data.boardList.map((board, index) => ({
@@ -120,10 +115,7 @@ const PostButton = styled.button`
     font-size: 21px;
     line-height: 44px;
     text-align: center;
-
     color: #FFFFFF;
-
-    
 `;
 
 const PostWrapper = styled.div`
