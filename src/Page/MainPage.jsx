@@ -114,6 +114,16 @@ const PostButton = styled.button`
     background: #2186FC;
     border-radius: 25px;
     margin-bottom: 40px;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 44px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    
 `;
 
 const PostWrapper = styled.div`
