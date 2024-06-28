@@ -8,7 +8,7 @@ import BlueProfile from '../Img/profile.svg';
 
 const MainPage = ({ posts, setPosts }) => {
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const MainPage = ({ posts, setPosts }) => {
             const { data } = response.data;
 
             const newPosts = data.boardList.map((board, index) => ({
-                id: `fetched-${(page - 1) * 10 + index + 1}`,
+                id: `fetched-${page * 10 + index + 1}`,
                 title: board.title,
                 body: board.content,
                 time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
