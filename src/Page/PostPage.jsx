@@ -7,7 +7,7 @@ const PostPage = ({ setPosts }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -15,7 +15,7 @@ const PostPage = ({ setPosts }) => {
         title: `제목 : ${title}`,
         content: content
       });
-  
+
       if (response.data.statusCode === "201") {
         const newPost = {
           id: `new-${Date.now()}`,
@@ -32,7 +32,7 @@ const PostPage = ({ setPosts }) => {
       console.error('게시글 작성 에러:', error);
     }
   };
-  
+
 
   const isButtonDisabled = title === "" || content === "";
 
@@ -73,12 +73,12 @@ const PostPage = ({ setPosts }) => {
             style={styles.backButton}
             onClick={() => navigate("/main")}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                styles.backButtonHover.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              styles.backButtonHover.backgroundColor)
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                styles.backButton.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              styles.backButton.backgroundColor)
             }
           >
             뒤로가기

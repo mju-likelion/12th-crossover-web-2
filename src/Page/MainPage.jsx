@@ -21,7 +21,12 @@ const MainPage = ({ posts, setPosts }) => {
     const fetchPosts = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await Axios.get(`/boards?page=${page}`);
+            const userToken = Cookies.get('userToken');
+            const response = await Axios.get(`/boards?page=${page}`, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
             const { data } = response.data;
 
             const newPosts = data.boardList.map((board, index) => ({
@@ -138,67 +143,59 @@ const Time = styled.p`
     bottom: 10px;
     right: 10px;
     margin: 0;
+    font-size: 20px;
 `;
 
 const ProfileBox = styled.div`
-    width: 699px;
-    height: 239px;
+    position: relative;
     display: flex;
-    justify-content: right;
+    flex-direction: column;
+    margin-top: 10px;
 `;
 
 const TextBox = styled.div`
-    width: 699px;
-    height: 239px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: flex-start;
-`;
-
-const ProfileImg = styled.img`
-    width: 62px;
-    height: 62px;
+    padding: 10px 10px 10px 10px;
 `;
 
 const Right = styled.div`
     display: flex;
-    align-items: end;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 10px 10px 10px;
 `;
 
 const Title = styled.p`
-    width: 598px;
-    height: 24px;
-    font-weight: 600;
-    font-size: 24px;
-    display: flex;
-    justify-content: flex-start;
-`;
-
-const ContentBox = styled.p`
-    margin-top: 13px;
-    width: 598px;
-    height: 198px;
-    border-radius: 25px;
-    border: 2px solid #1E90FF;
-    background-color: white;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    color: #000;
+    font-weight: bold;
+    margin: 0 0 10px 10px;
+    font-size: 30px;
 `;
 
 const Contents = styled.p`
-    width: 550px;
-    height: 162px;
-    margin: 20px;
-    display: flex;
-    justify-content: flex-start;
+    color: #666666;
+    margin: 0;
+    font-size: 20px;
 `;
 
-const Loading = styled.p`
-    font-size: 18px;
-    color: gray;
+const ContentBox = styled.div`
+    padding: 0px 10px 0px 10px;
+    margin-top: 0px;
+`;
+
+const ProfileImg = styled.img`
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+`;
+
+const Loading = styled.div`
+    color: #2186FC;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
 `;
 
 export default MainPage;
