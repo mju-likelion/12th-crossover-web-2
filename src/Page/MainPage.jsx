@@ -1,14 +1,18 @@
+// MainPage.jsx
+
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Axios from '../Api/Axios';
+import Modal from '../Component/ModalComponenet.jsx';
 import BlueProfile from '../Img/profile.svg';
 
 const MainPage = ({ posts, setPosts }) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(0);
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,14 +62,17 @@ const MainPage = ({ posts, setPosts }) => {
         navigate(`/delete/${postId}`);
     };
 
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
+
     return (
         <Container>
             <PostButton onClick={() => navigate('/post')}>작성하기</PostButton>
             {posts.map((post, index) => (
-                <PostWrapper key={index} onClick={() => handlePostClick(post.id)}>
+                <PostWrapper key={index}>
                     <Box>
                         <ProfileBox>
-                            <TextBox>
+                            <TextBox onClick={() => handlePostClick(post.id)}>
                                 <ProfileImg src={BlueProfile} alt="profileImg" />
                                 <Right>
                                     <Title>{post.title}</Title>
@@ -77,9 +84,10 @@ const MainPage = ({ posts, setPosts }) => {
                         </ProfileBox>
                     </Box>
                     <Time>{post.time}</Time>
+                    <MoreButton onClick={openModal}>더 보기</MoreButton>
                 </PostWrapper>
             ))}
-            
+            <Modal showModal={showModal} closeModal={closeModal} />
         </Container>
     );
 };
@@ -106,7 +114,7 @@ const PostButton = styled.button`
     font-size: 16px;
     width: 233px;
     height: 70px;
-    background: #2186FC;
+    background: #2186fc;
     border-radius: 25px;
     margin-bottom: 40px;
     font-family: 'Noto Sans';
@@ -115,7 +123,6 @@ const PostButton = styled.button`
     font-size: 21px;
     line-height: 44px;
     text-align: center;
-    color: #FFFFFF;
 `;
 
 const PostWrapper = styled.div`
@@ -188,7 +195,7 @@ const ContentBox = styled.div`
     width: 698px;
     height: 198px;
     border-radius: 25px;
-    border: 2px solid #1E90FF;
+    border: 2px solid #1e90ff;
     background-color: white;
     display: flex;
     justify-content: flex-start;
@@ -204,6 +211,17 @@ const ProfileImg = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 25px;
+`;
+
+const MoreButton = styled.button`
+    align-self: flex-end;
+    color: #2186fc;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
 `;
 
 
