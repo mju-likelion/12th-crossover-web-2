@@ -13,10 +13,11 @@ function LoginPage() {
   const [isValid, setIsValid] = useState(false);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const idPattern = /^[a-zA-Z0-9]{5,10}$/;
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,14}$/;
+    const passwordPattern =
+      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,14}$/;
     setIsValid(idPattern.test(id) && passwordPattern.test(password));
   }, [id, password]);
 
@@ -33,8 +34,8 @@ function LoginPage() {
         alert(`로그인 실패: ${response.data.message}`);
       }
     } catch (error) {
-      console.error('로그인 오류:', error);
-      alert('로그인 중 오류가 발생했습니다.');
+      console.error("로그인 오류:", error);
+      alert("로그인 중 오류가 발생했습니다.");
     }
   };
 
@@ -43,7 +44,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="container" style={{ width: "400px" }}>
+    <LoginContainer>
       <form onSubmit={handleSubmit}>
         <LoginComponent
           id={id}
@@ -52,15 +53,24 @@ function LoginPage() {
           setPassword={setPassword}
         />
         <div style={styles.footer}>
-          <SubmitButton type="submit" className="submit-btn" disabled={!isValid}>
+          <SubmitButton
+            type="submit"
+            className="submit-btn"
+            disabled={!isValid}
+          >
             로그인
           </SubmitButton>
           <SignUpButton onClick={handleSignUp}>회원가입</SignUpButton>
         </div>
       </form>
-    </div>
+    </LoginContainer>
   );
 }
+
+const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const SignUpButton = styled.button`
   font-size: 14px;
@@ -73,12 +83,12 @@ const SignUpButton = styled.button`
 `;
 
 const SubmitButton = styled.button`
-  background-color: ${(props) => (props.disabled ? "var(--colorBlue1)" : "blue")};
+  background-color: ${(props) =>
+    props.disabled ? "var(--colorBlue1)" : "blue"};
   color: white;
   font-size: 14px;
   font-weight: bold;
   border: none;
-  padding: 10px;
   margin-top: 10px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
