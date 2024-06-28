@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Header from "./Component/Header.jsx";
 import DeletePostPage from "./Page/DeletePostPage";
 import JoinPage from "./Page/JoinPage";
 import LoginPage from "./Page/LoginPage";
@@ -13,7 +14,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route
