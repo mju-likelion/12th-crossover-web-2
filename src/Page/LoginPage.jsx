@@ -25,11 +25,11 @@ function LoginPage() {
     event.preventDefault();
 
     try {
-      const response = await Axios.post('/auth/login', { id, password });
+      const response = await Axios.post("/auth/login", { id, password });
       if (response.status === 200) {
-        alert('로그인 성공.');
-        Cookies.set('userToken', response.data.token);
-        navigate('/main');
+        alert("로그인 성공.");
+        Cookies.set("userToken", response.data.token);
+        navigate("/main");
       } else {
         alert(`로그인 실패: ${response.data.message}`);
       }
@@ -70,27 +70,29 @@ function LoginPage() {
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 80vh;
 `;
 
 const SignUpButton = styled.button`
-  font-size: 14px;
+  font-size: 16px;
   color: var(--colorGray);
   font-weight: bold;
   border: none;
   background: none;
-  margin-top: 10px;
+  margin-top: 2vh;
   cursor: pointer;
 `;
 
 const SubmitButton = styled.button`
   background-color: ${(props) =>
-    props.disabled ? "var(--colorBlue1)" : "blue"};
+    props.disabled ? "var(--colorBlue1)" : "#59A4FB"};
   color: white;
-  font-size: 14px;
+  font-size: 3vh;
   font-weight: bold;
   border: none;
-  margin-top: 10px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  margin-top: 3vh;
+  cursor: ${(props) => (props.disabled ? "pointer" : "pointer")};
 `;
 
 const styles = {
@@ -98,7 +100,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "end",
-    margin: "20px",
   },
   submitButton: {
     flex: 1,
