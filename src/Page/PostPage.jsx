@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from '../Api/Axios';
 
 const PostPage = ({ setPosts }) => {
   const [title, setTitle] = useState("");
@@ -10,27 +9,35 @@ const PostPage = ({ setPosts }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await Axios.post('/boards', {
-        title: `제목 : ${title}`,
-        content: content
-      });
+    // try {
+    //   const response = await Axios.post('/boards', {
+    //     title: `제목 : ${title}`,
+    //     content: content
+    //   });
 
-      if (response.data.statusCode === "201") {
-        const newPost = {
-          id: `new-${Date.now()}`,
-          title: `제목 : ${title}`,
-          body: content,
-          time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
-        };
-        setPosts((prevPosts) => [newPost, ...prevPosts]);
-        navigate("/main");
-      } else {
-        console.error('게시글 작성 실패:', response.data.message);
-      }
-    } catch (error) {
-      console.error('게시글 작성 에러:', error);
-    }
+    //   if (response.data.statusCode === "201") {
+    //     const newPost = {
+    //       id: `new-${Date.now()}`,
+    //       title: `제목 : ${title}`,
+    //       body: content,
+    //       time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
+    //     };
+    //     setPosts((prevPosts) => [newPost, ...prevPosts]);
+    //     navigate("/main");
+    //   } else {
+    //     console.error('게시글 작성 실패:', response.data.message);
+    //   }
+    // } catch (error) {
+    //   console.error('게시글 작성 에러:', error);
+    // }
+    const newPost = {
+      id: `new-${Date.now()}`,
+      title: `제목 : ${title}`,
+      body: content,
+      time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
+    };
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
+    navigate("/main");
   };
 
 
@@ -118,7 +125,7 @@ const styles = {
   form: {
     display: "flex",
     flexDirection: "column",
-    width: "700px",
+    width: "794px",
     padding: "20px",
     borderRadius: "10px",
   },
@@ -152,7 +159,7 @@ const styles = {
     fontSize: "16px",
     borderRadius: "15px",
     resize: "none",
-    height: "500px",
+    height: "550px",
     boxSizing: "border-box",
     border: "none",
     outline: "none",

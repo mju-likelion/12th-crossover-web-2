@@ -159,14 +159,13 @@ const TextBox = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 10px 10px 10px 10px;
 `;
 
 const Right = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px 10px 10px 10px;
+    padding: 10px;
 `;
 
 const Title = styled.p`
@@ -177,14 +176,28 @@ const Title = styled.p`
 `;
 
 const Contents = styled.p`
-    color: #666666;
-    margin: 0;
-    font-size: 20px;
+    width: 550px;
+    height: 162px;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
 `;
 
 const ContentBox = styled.div`
-    padding: 0px 10px 0px 10px;
-    margin-top: 0px;
+    margin-top: 13px;
+    width: 698px;
+    height: 198px;
+    border-radius: 25px;
+    border: 2px solid #1E90FF;
+    background-color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
 `;
 
 const ProfileImg = styled.img`
