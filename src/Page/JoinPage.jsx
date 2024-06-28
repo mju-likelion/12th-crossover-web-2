@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from "../Api/Axios.js";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
 import JoinComponent2 from "../Component/JoinComponent2";
@@ -19,7 +19,7 @@ function JoinPage() {
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await axios.get('https://api.likelion-crossover-team2.com/auth/sign-up', {
+        const response = await Axios.get('https://api.likelion-crossover-team2.com/auth/sign-up', {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -58,7 +58,7 @@ function JoinPage() {
     }
 
     try {
-      const response = await axios.post('https://api.likelion-crossover-team2.com/auth/sign-up', {
+      const response = await Axios.post('https://api.likelion-crossover-team2.com/auth/sign-up', {
         id: id,
         email: email,
         password: password,
