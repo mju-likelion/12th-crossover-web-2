@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from "../Api/Axios";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
 import JoinComponent2 from "../Component/JoinComponent2";
@@ -18,15 +19,14 @@ function JoinPage() {
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await fetch('https://api.likelion-crossover-team2.com/auth/sign-up', {
-          method: 'GET',
+        const response = await Axios.get('/auth/sign-up', {
           headers: {
             'Content-Type': 'application/json',
           },
         });
 
-        if (response.ok) {
-          const data = await response.json();
+        if (response.status === 200) {
+          const data = response.data;
           if (data.data && data.data.clauseDtos && data.data.clauseDtos.length > 0) {
             setClauseContent(data.data.clauseDtos[0].content);
           } else {
@@ -58,24 +58,22 @@ function JoinPage() {
     }
 
     try {
-      const response = await fetch('https://api.likelion-crossover-team2.com/auth/sign-up', {
-        method: 'POST',
+      const response = await Axios.post('/auth/sign-up', {
+        id: id,
+        email: email,
+        password: password,
+        name: name,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          id: id,
-          email: email,
-          password: password,
-          name: name,
-        }),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         alert('회원가입 성공.');
         navigate('/');  // 메인 페이지로 이동
       } else {
-        const errorData = await response.json();
+        const errorData = response.data;
         alert(`회원가입 실패: ${errorData.message}`);
       }
     } catch (error) {
