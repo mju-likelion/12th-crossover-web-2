@@ -1,3 +1,5 @@
+// ModalComponent.jsx
+
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -24,38 +26,22 @@ const ModalComponent = ({ showModal, closeModal, boardId, children }) => {
         }
     };
 
-    const handleCommentSubmit = async () => {
+    const handleSubmitComment = async () => {
         try {
-            const response = await axios.post(`/boards/${boardId}/comments`, { content: newComment });
-            if (response.data.statusCode === "201") {
-                setNewComment("");
-                fetchComments();
-            } else {
-                console.error("Failed to submit comment", response.data.message);
-            }
+            await axios.post(`/boards/${boardId}/comments`, { text: newComment });
+            setNewComment("");
+            fetchComments();
         } catch (error) {
-            if (error.response && error.response.status === 404) {
-                console.error("404 error: Not Found - Check if the endpoint is correct.");
-            } else {
-                console.error("Failed to submit comment", error);
-            }
+            console.error("Failed to submit comment", error);
         }
     };
 
-    const handlePostDelete = async () => {
+    const handleDeleteComment = async (commentId) => {
         try {
-            const response = await axios.delete(`/boards/${boardId}`);
-            if (response.data.statusCode === "200") {
-                closeModal();
-            } else {
-                console.error("Failed to delete post", response.data.message);
-            }
+            await axios.delete(`/boards/${boardId}/comments/${commentId}`);
+            fetchComments();
         } catch (error) {
-            if (error.response && error.response.status === 404) {
-                console.error("404 error: Not Found - Check if the endpoint is correct.");
-            } else {
-                console.error("Failed to delete post", error);
-            }
+            console.error(`Failed to delete comment with ID ${commentId}`, error);
         }
     };
 
@@ -65,16 +51,17 @@ const ModalComponent = ({ showModal, closeModal, boardId, children }) => {
                 <ModalContent>
                     <CloseButton onClick={closeModal}>닫기</CloseButton>
                     {children}
-                    <DeletePostButton onClick={handlePostDelete}>게시글 삭제</DeletePostButton>
+                
                     <CommentWrapper>
                         <CommentInput
                             placeholder="댓글을 입력하세요..."
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
                         />
-                        <SubmitButton onClick={handleCommentSubmit}>작성</SubmitButton>
+                        <SubmitButton onClick={handleSubmitComment}>등록</SubmitButton>
+                    
                         <CommentList>
-                            <CommentComponent comments={comments} />
+                            <CommentComponent comments={comments} onDelete={handleDeleteComment} />
                         </CommentList>
                     </CommentWrapper>
                 </ModalContent>
@@ -100,38 +87,34 @@ const ModalWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; /* Ensure modal is on top */
 `;
 
 const ModalContent = styled.div`
     background-color: white;
     padding: 20px;
     width: 500px;
-    height: 500px;
+    height: 600px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 `;
 
 const CloseButton = styled.button`
     align-self: flex-end;
-    color: #2186fc;
+    color: #ffffff;
     border: none;
-    background: none;
+    background-color: #2186fc;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-`;
-
-const DeletePostButton = styled.button`
-    padding: 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-    background-color: red;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
 `;
 
 const CommentWrapper = styled.div`
@@ -141,24 +124,29 @@ const CommentWrapper = styled.div`
     gap: 10px;
 `;
 
-const CommentInput = styled.input`
+const CommentInput = styled.textarea`
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    resize: vertical;
+    min-height: 80px;
 `;
 
 const SubmitButton = styled.button`
-    padding: 10px;
-    font-size: 14px;
+    align-self: flex-end;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
     background-color: #2186fc;
-    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 `;
 
 const CommentList = styled.div`
+    overflow-y: auto;
+    max-height: 200px;
     display: flex;
     flex-direction: column;
     gap: 10px;

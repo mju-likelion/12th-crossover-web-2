@@ -1,30 +1,42 @@
+// CommentComponent.jsx
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const CommentComponent = ({ name, content, timeStamp, isMyPost, onDelete }) => (
-    <CommentItem isMyPost={isMyPost}>
-        <CommentName>{name}</CommentName>
-        <CommentContent>{content}</CommentContent>
-        <CommentTime>{timeStamp}</CommentTime>
-        {isMyPost && <DeleteButton onClick={onDelete}>삭제</DeleteButton>}
-    </CommentItem>
+const CommentComponent = ({ comments, onDelete }) => (
+    <>
+        {comments.map(comment => (
+            <CommentItem key={comment.id}>
+                <CommentName>{comment.name}</CommentName>
+                <CommentContent>{comment.content}</CommentContent>
+                <CommentTime>{comment.timeStamp}</CommentTime>
+                {comment.isMyPost && (
+                    <DeleteButton onClick={() => onDelete(comment.id)}>삭제</DeleteButton>
+                )}
+            </CommentItem>
+        ))}
+    </>
 );
 
 CommentComponent.propTypes = {
-    name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    timeStamp: PropTypes.string.isRequired,
-    isMyPost: PropTypes.bool.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        timeStamp: PropTypes.string.isRequired,
+        isMyPost: PropTypes.bool.isRequired,
+    })).isRequired,
     onDelete: PropTypes.func.isRequired,
 };
 
 const CommentItem = styled.div`
-    padding: 10px;
-    background-color: ${(props) => (props.isMyPost ? '#e0f2fe' : '#f3f3f3')};
+    padding: 15px;
+    background-color: #f9f9f9;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     position: relative;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const CommentName = styled.p`
@@ -33,7 +45,7 @@ const CommentName = styled.p`
 `;
 
 const CommentContent = styled.p`
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 `;
 
 const CommentTime = styled.span`
@@ -49,6 +61,7 @@ const DeleteButton = styled.button`
     border: none;
     color: #ff0000;
     cursor: pointer;
+    font-size: 14px;
 `;
 
 export default CommentComponent;
