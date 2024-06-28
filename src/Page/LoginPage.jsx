@@ -1,7 +1,8 @@
-import Cookies from "js-cookie"; // js-cookie 라이브러리 추가
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Axios from "../Api/Axios";
 import "../commonComponent/commonComponent.css";
 import LoginComponent from "../Component/LoginComponent";
 
@@ -22,22 +23,13 @@ function LoginPage() {
     event.preventDefault();
 
     try {
-      const response = await fetch('https://api.likelion-crossover-team2.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ id: id, password: password }),
-      });
-      if (response.ok) {
+      const response = await Axios.post('/auth/login', { id, password });
+      if (response.status === 200) {
         alert('로그인 성공.');
-        const data = await response.json();
-        Cookies.set('userToken', data.token);
+        Cookies.set('userToken', response.data.token);
         navigate('/main');
       } else {
-        const errorData = await response.json();
-        alert(`로그인 실패: ${errorData.message}`);
+        alert(`로그인 실패: ${response.data.message}`);
       }
     } catch (error) {
       console.error('로그인 오류:', error);
