@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Axios from '../Api/Axios';
 import PostComponent from '../Component/PostComponent';
 
 const DeletePostPage = ({ posts, setPosts }) => {
@@ -11,10 +12,8 @@ const DeletePostPage = ({ posts, setPosts }) => {
     const handleDelete = async (confirm) => {
         if (confirm) {
             try {
-                const response = await fetch(`https://api.likelion-crossover-team2.com/boards/{board-id}`, {
-                    method: 'DELETE'
-                });
-                if (response.ok) {
+                const response = await Axios.delete(`/boards/{board-id}`);
+                if (response.status === 200) {
                     setPosts((prevPosts) => prevPosts.filter((p) => p.id !== postId));
                     navigate('/main');
                 } else {
@@ -35,7 +34,7 @@ const DeletePostPage = ({ posts, setPosts }) => {
                     style={styles.backButton}
                     onClick={() => navigate('/main')}
                 >
-                    뒤로가기
+                    확인
                 </button>
             </div>
         );
