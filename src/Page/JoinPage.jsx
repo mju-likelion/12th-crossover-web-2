@@ -19,7 +19,7 @@ function JoinPage() {
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await Axios.get('https://api.likelion-crossover-team2.com/auth/sign-up', {
+        const response = await Axios.get('/auth/sign-up', {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -58,7 +58,7 @@ function JoinPage() {
     }
 
     try {
-      const response = await Axios.post('https://api.likelion-crossover-team2.com/auth/sign-up', {
+      const response = await Axios.post('/auth/sign-up', {
         id: id,
         email: email,
         password: password,
