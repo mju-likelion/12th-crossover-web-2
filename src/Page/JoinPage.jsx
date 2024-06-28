@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from "../Api/Axios.js";
+import Axios from "../Api/Axios";
 import "../commonComponent/commonComponent.css";
 import JoinComponent1 from "../Component/JoinComponent1";
 import JoinComponent2 from "../Component/JoinComponent2";

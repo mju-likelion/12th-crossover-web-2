@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Axios from '../Api/Axios.js';
+import Axios from '../Api/Axios';
 import PostComponent from '../Component/PostComponent';
 
 const DeletePostPage = ({ posts, setPosts }) => {

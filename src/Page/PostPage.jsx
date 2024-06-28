@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from '../Api/Axios.js';
+import Axios from '../Api/Axios';
 
 const PostPage = ({ setPosts }) => {
   const [title, setTitle] = useState("");
