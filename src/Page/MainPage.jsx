@@ -79,7 +79,7 @@ const MainPage = ({ posts, setPosts }) => {
                     <Time>{post.time}</Time>
                 </PostWrapper>
             ))}
-            {loading && <Loading>Loading...</Loading>}
+            
         </Container>
     );
 };
@@ -206,11 +206,5 @@ const ProfileImg = styled.img`
     border-radius: 25px;
 `;
 
-const Loading = styled.div`
-    color: #2186FC;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-`;
 
 export default MainPage;
