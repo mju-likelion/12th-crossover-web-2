@@ -99,10 +99,13 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
     margin-bottom: 5px;
-    font-weight: bold;
     display: flex;
     align-items: center;
     height: 50px;
+    color: #000;
+    font-weight: bold;
+    margin: 0 0 10px 10px;
+    font-size: 20px;
 `;
 
 const Input = styled.input`
