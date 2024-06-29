@@ -19,23 +19,27 @@ function JoinPage() {
   useEffect(() => {
     async function fetchClauseContent() {
       try {
-        const response = await Axios.get('/auth/sign-up', {
+        const response = await Axios.get("/auth/sign-up", {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
 
         if (response.status === 200) {
           const data = response.data;
-          if (data.data && data.data.clauseDtos && data.data.clauseDtos.length > 0) {
+          if (
+            data.data &&
+            data.data.clauseDtos &&
+            data.data.clauseDtos.length > 0
+          ) {
             setClauseContent(data.data.clauseDtos[0].content);
           } else {
-            alert('약관 내용을 찾을 수 없습니다.');
+            alert("약관 내용을 찾을 수 없습니다.");
           }
         }
       } catch (error) {
-        console.error('회원가입 페이지 조회 오류:', error);
-        alert('회원가입 페이지 조회 중 오류가 발생했습니다.');
+        console.error("회원가입 페이지 조회 오류:", error);
+        alert("회원가입 페이지 조회 중 오류가 발생했습니다.");
       }
     }
 
@@ -47,44 +51,48 @@ function JoinPage() {
     if (!agree) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        agree: "약관에 동의해 주세요."
+        agree: "약관에 동의해 주세요.",
       }));
       return;
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        agree: ""
+        agree: "",
       }));
     }
 
     try {
-      const response = await Axios.post('/auth/sign-up', {
-        id: id,
-        email: email,
-        password: password,
-        name: name,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await Axios.post(
+        "/auth/sign-up",
+        {
+          id: id,
+          email: email,
+          password: password,
+          name: name,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
 
       if (response.status === 200) {
-        alert('회원가입 성공.');
-        navigate('/');  // 메인 페이지로 이동
+        alert("회원가입 성공.");
+        navigate("/"); // 메인 페이지로 이동
       } else {
         const errorData = response.data;
         alert(`회원가입 실패: ${errorData.message}`);
       }
     } catch (error) {
-      console.error('회원가입 오류:', error);
-      alert('회원가입 중 오류가 발생했습니다.');
+      console.error("회원가입 오류:", error);
+      alert("회원가입 중 오류가 발생했습니다.");
     }
   };
 
   return (
-    <div className="container" style={{ width: "900px" }}>
-      <form onSubmit={handleSubmit}>
+    <div className="container" style={styles.container}>
+      <form onSubmit={handleSubmit} style={styles.form}>
         <JoinComponent1
           id={id}
           setId={setId}
@@ -102,7 +110,7 @@ function JoinPage() {
           error={errors.agree}
           policyText={clauseContent}
         />
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-btn" style={styles.submit}>
           완료하기
         </button>
       </form>
@@ -110,4 +118,22 @@ function JoinPage() {
   );
 }
 
+const styles = {
+  container: {
+    width: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  submit: {
+    width: "50vh",
+    fontSize: "3vh",
+    fontWeight: "bold",
+  },
+};
 export default JoinPage;

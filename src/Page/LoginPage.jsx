@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Axios from "../Api/Axios";
-
 import "../commonComponent/commonComponent.css";
 import LoginComponent from "../Component/LoginComponent";
+import { useAuth } from "../Component/AuthContext";
 
 function LoginPage() {
   const [id, setId] = useState("");
@@ -13,6 +13,7 @@ function LoginPage() {
   const [isValid, setIsValid] = useState(false);
 
   const navigate = useNavigate();
+  const { logined } = useAuth();
 
   useEffect(() => {
     const idPattern = /^[a-zA-Z0-9]{5,10}$/;
@@ -27,8 +28,9 @@ function LoginPage() {
     try {
       const response = await Axios.post("/auth/login", { id, password });
       if (response.status === 200) {
-        alert("로그인 성공.");
+        alert("로그인 성공!");
         Cookies.set("userToken", response.data.token);
+        logined();
         navigate("/main");
       } else {
         alert(`로그인 실패: ${response.data.message}`);
@@ -77,7 +79,7 @@ const LoginContainer = styled.div`
 const SignUpButton = styled.button`
   font-size: 16px;
   color: var(--colorGray);
-  font-weight: bold;
+  font-weight: 600;
   border: none;
   background: none;
   margin-top: 2vh;
@@ -92,7 +94,6 @@ const SubmitButton = styled.button`
   font-weight: bold;
   border: none;
   margin-top: 3vh;
-  cursor: ${(props) => (props.disabled ? "pointer" : "pointer")};
 `;
 
 const styles = {
