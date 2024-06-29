@@ -20,14 +20,14 @@ const MainPage = ({ posts, setPosts }) => {
         }
     }, [navigate]);
 
-    const fetchPosts = useCallback(async () => {
+    const fetchPosts = useCallback(async (currentPage) => {
         setLoading(true);
         try {
-            const response = await Axios.get(`/boards?page=${page}`);
+            const response = await Axios.get(`/boards?page=${currentPage}`);
             const { data } = response.data;
 
             const newPosts = data.boardList.map((board, index) => ({
-                id: `fetched-${page * 10 + index + 1}`,
+                id: `fetched-${currentPage * 10 + index + 1}`,
                 title: board.title,
                 body: board.content,
                 time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
@@ -39,11 +39,11 @@ const MainPage = ({ posts, setPosts }) => {
             console.error('Error fetching posts:', error);
             setLoading(false);
         }
-    }, [page, setPosts]);
+    }, [setPosts]);
 
     useEffect(() => {
-        fetchPosts();
-    }, [fetchPosts]);
+        fetchPosts(page);
+    }, [fetchPosts, page]);
 
     const handleScroll = useCallback(() => {
         if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 5 && !loading) {
@@ -67,7 +67,7 @@ const MainPage = ({ posts, setPosts }) => {
         <Container>
             <PostButton onClick={() => navigate('/post')}>작성하기</PostButton>
             {posts.map((post, index) => (
-                <PostWrapper key={index}>
+                <PostWrapper key={post.id || index}>
                     <Box>
                         <ProfileBox>
                             <TextBox onClick={() => handlePostClick(post.id)}>
@@ -221,6 +221,5 @@ const MoreButton = styled.button`
     font-weight: bold;
     margin: 10px;
 `;
-
 
 export default MainPage;
