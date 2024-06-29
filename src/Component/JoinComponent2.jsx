@@ -11,7 +11,9 @@ function JoinComponent2({ agree, setAgree, error, policyText }) {
     return (
         <div style={styles.formGroup}>
             <div style={styles.policyHeader}>
-                <span>[필수] 개인정보보호정책</span>
+                <span>
+                    <span style={styles.required}>[필수]</span> 개인정보보호정책
+                </span>
                 <label style={styles.agreeLabel}>
                     <input
                         type="checkbox"
@@ -62,6 +64,9 @@ const styles = {
         alignItems: 'center',
         marginBottom: '10px',
         fontWeight: 'bold',
+    },
+    required: {
+        color: 'var(--colorGreen)',
     },
     agreeLabel: {
         display: 'flex',
