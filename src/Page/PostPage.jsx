@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from '../Api/Axios';
 
 const PostPage = ({ setPosts }) => {
   const [title, setTitle] = useState("");
@@ -30,14 +31,7 @@ const PostPage = ({ setPosts }) => {
     } catch (error) {
       console.error('게시글 작성 에러:', error);
     }
-    const newPost = {
-      id: `new-${Date.now()}`,
-      title: `제목 : ${title}`,
-      body: content,
-      time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }),
-    };
-    setPosts((prevPosts) => [newPost, ...prevPosts]);
-    navigate("/main");
+
   };
 
 
